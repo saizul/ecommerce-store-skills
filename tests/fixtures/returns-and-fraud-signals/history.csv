@@ -1,0 +1,9 @@
+Order ID,Phone,Delivery Status
+6001,+8801612345678,Returned
+6002,01612345678,Refused by customer
+6003,8801612345678,Delivered
+6010,01712345678,Delivered
+6011,01712345678,Completed
+6012,01712345678,delivered
+6013,01712345678,Delivered
+6020,01912345678,Cancelled

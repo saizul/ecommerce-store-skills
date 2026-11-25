@@ -1,0 +1,4 @@
+Name,Email,Financial Status,Paid at,Created at,Total,Lineitem quantity,Lineitem name,Lineitem sku,Billing Name,Billing Address1,Billing City,Billing Zip,Billing Country,Billing Phone,Payment Method
+#1101,mina@example.com,pending,,2026-11-23 14:03:22 +0600,1500.00,1,Organic Tee - M,TEE-M,Mina Akter,Mirpur 10 Block C,Dhaka,1216,BD,01556-778899,Cash on Delivery (COD)
+#1101,mina@example.com,,,2026-11-23 14:03:22 +0600,,2,Stoneware Mug,MUG-1,,,,,,,
+#1102,omar@example.com,paid,2026-11-23 15:00:00 +0600,2026-11-23 15:00:00 +0600,800.00,1,Stoneware Mug,MUG-1,Omar Faruk,Boyra Main Road,Khulna,9000,BD,01311-000111,bKash

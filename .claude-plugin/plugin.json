@@ -1,0 +1,14 @@
+{
+  "name": "ecommerce-store-skills",
+  "displayName": "E-commerce Store Skills",
+  "version": "0.1.0",
+  "description": "Agent Skills for online stores: Google Merchant Center feed validation, product schema, checkout CRO audit, product copy, order export cleanup, inventory reorder points, speed and image audit, COD risk and returns analysis.",
+  "author": {
+    "name": "Saizul Amin",
+    "url": "https://github.com/saizul"
+  },
+  "homepage": "https://github.com/saizul/ecommerce-store-skills",
+  "repository": "https://github.com/saizul/ecommerce-store-skills",
+  "license": "MIT",
+  "keywords": ["ecommerce", "woocommerce", "shopify", "google-merchant-center", "product-feed", "schema-org", "cro", "inventory", "cod", "bangladesh"]
+}

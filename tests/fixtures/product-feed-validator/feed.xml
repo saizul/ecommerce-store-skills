@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Example Store</title>
+    <link>https://shop.example.com</link>
+    <item>
+      <g:id>WOO-101</g:id>
+      <g:title>Acme Bamboo Cutting Board, Large 45 x 30 cm</g:title>
+      <g:description>Thick bamboo cutting board with juice groove and side handles. Knife friendly and naturally antibacterial.</g:description>
+      <g:link>https://shop.example.com/product/bamboo-board/</g:link>
+      <g:image_link>https://shop.example.com/wp-content/uploads/board.jpg</g:image_link>
+      <g:additional_image_link>https://shop.example.com/wp-content/uploads/board-2.jpg</g:additional_image_link>
+      <g:additional_image_link>https://shop.example.com/wp-content/uploads/board-3.jpg</g:additional_image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>1200.00 BDT</g:price>
+      <g:brand>Acme</g:brand>
+      <g:gtin>96385074</g:gtin>
+      <g:condition>new</g:condition>
+      <g:shipping><g:country>BD</g:country><g:price>60 BDT</g:price></g:shipping>
+      <g:product_type>Home &gt; Kitchen</g:product_type>
+    </item>
+    <item>
+      <g:id>WOO-102</g:id>
+      <g:title>Acme Bamboo Spoon Set</g:title>
+      <g:description>Set of three bamboo cooking spoons.</g:description>
+      <g:link>https://shop.example.com/product/spoons/</g:link>
+      <g:image_link>https://shop.example.com/wp-content/uploads/spoons.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>450.00 BDT</g:price>
+      <g:sale_price>500.00 BDT</g:sale_price>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:condition>new</g:condition>
+    </item>
+  </channel>
+</rss>

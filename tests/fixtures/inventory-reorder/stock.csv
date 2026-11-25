@@ -1,0 +1,7 @@
+SKU,Name,Stock,On order,Lead time days,MOQ,Case pack,Cost
+TEE-M,Organic Tee M,40,0,14,50,10,6.50
+MUG-1,Stoneware Mug,0,0,21,,,3
+BOARD,Bamboo Board,400,0,30,,,8
+SPOON,Spoon Set,25,0,,,,2
+NEWBAG,Canvas Bag,100,0,10,,,4
+CAP,Cotton Cap,60,0,7,,,3

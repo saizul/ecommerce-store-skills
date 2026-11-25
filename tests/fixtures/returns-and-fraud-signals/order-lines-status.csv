@@ -1,0 +1,5 @@
+Order Number,SKU,Quantity,Billing Email,Status
+1,TEE-M,1,a@example.com,Delivered
+2,TEE-M,1,b@example.com,Returned - size
+3,MUG-1,1,b@example.com,RTO
+4,MUG-1,1,c@example.com,delivered

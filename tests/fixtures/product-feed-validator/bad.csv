@@ -1,0 +1,5 @@
+id,title,description,link,image_link,availability,price,sale_price,brand,gtin,mpn,condition,identifier_exists
+SKU-1,FREE SHIPPING!!! BEST LEATHER WALLET FOR MEN,FREE SHIPPING!!! BEST LEATHER WALLET FOR MEN,http://shop.example.com/wallet,https://shop.example.com/wp-content/uploads/woocommerce-placeholder.png,In Stock,$29.99,35.00 USD,Acme,4006381333932,,brand new,
+SKU-1,Duplicate id item for testing purposes here,A second item that reuses the same id as the first item in this feed.,https://shop.example.com/dup,https://cdn.example.com/a.svg,sold out,0.00 USD,,,,,,
+SKU-3,Short,,shop.example.com/no-scheme,,,15 USD,,,12345,,new,no
+SKU-4,Handmade Ceramic Bowl Set of Four in Ocean Blue,Four hand-thrown ceramic bowls glazed in ocean blue. Each bowl is 15 cm wide and food safe.,https://shop.example.com/bowls,https://cdn.example.com/bowls.jpg,backorder,40.00 EUR,,,,,new,

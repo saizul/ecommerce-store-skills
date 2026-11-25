@@ -1,0 +1,3 @@
+id	title	description	link	image_link	availability	price	sale_price	brand	gtin	condition	google_product_category
+TSH-001-M	Acme Organic Cotton T-Shirt, Men, Navy, Size M	Soft 180 gsm organic cotton crew-neck t-shirt with reinforced seams. Pre-shrunk and machine washable at 30C.	https://shop.example.com/products/organic-tee?variant=m	https://cdn.example.com/img/organic-tee-navy.jpg	in_stock	25.00 USD	19.99 USD	Acme	4006381333931	new	212
+MUG-002	Acme Stoneware Coffee Mug 350 ml, Matte Black	Hand-glazed stoneware mug that holds 350 ml. Dishwasher and microwave safe, lead-free glaze.	https://shop.example.com/products/stoneware-mug	https://cdn.example.com/img/mug-black.webp	in_stock	14.50 USD		Acme	036000291452	new	2169

@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce-store-skills",
+  "description": "Agent Skills for running and improving WooCommerce and Shopify stores.",
+  "owner": {
+    "name": "Saizul Amin",
+    "url": "https://github.com/saizul"
+  },
+  "plugins": [
+    {
+      "name": "ecommerce-store-skills",
+      "source": "./",
+      "description": "Merchant Center feed validation, product JSON-LD, checkout CRO audit, product copy scoring, order export cleanup (Bangladesh +880), inventory reorder points, store speed and image audit, COD risk and return analysis.",
+      "category": "ecommerce",
+      "tags": ["ecommerce", "woocommerce", "shopify", "google-merchant-center", "seo", "cro", "inventory", "bangladesh"],
+      "skills": [
+        "./skills/product-feed-validator",
+        "./skills/product-schema",
+        "./skills/checkout-cro-audit",
+        "./skills/product-content-writer",
+        "./skills/order-export-cleanup",
+        "./skills/inventory-reorder",
+        "./skills/store-speed-audit",
+        "./skills/returns-and-fraud-signals"
+      ]
+    }
+  ]
+}

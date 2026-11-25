@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Release artifacts (built by .github/workflows/release.yml)
+dist/
+
+# Real store exports contain customer data: never commit them.
+# Test fixtures in tests/fixtures/ are synthetic and are committed.
+/*.csv
+/exports/
+/orders*/
+*-clean.csv
+scored.csv
+purchase-order.csv
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store

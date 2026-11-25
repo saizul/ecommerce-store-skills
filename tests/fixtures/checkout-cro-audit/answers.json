@@ -1,0 +1,14 @@
+{
+  "cart-shipping-cost": "no",
+  "cart-total-clear": "yes",
+  "cart-coupon-collapsed": "partial",
+  "guest-checkout": "yes",
+  "field-count": "no",
+  "payment-methods": "yes",
+  "cod-fee-clear": "partial",
+  "captcha": "no",
+  "express-pay": "na",
+  "tap-targets": "no",
+  "made-up-id": "yes",
+  "viewport": "maybe"
+}

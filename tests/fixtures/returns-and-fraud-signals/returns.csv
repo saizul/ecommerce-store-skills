@@ -1,0 +1,37 @@
+Order ID,SKU,Qty,Return reason
+5001,TEE-M,1,Fit is loose
+5005,TEE-M,1,wrong size ordered
+5006,BAG-1,1,colour looks different from picture
+5009,TEE-M,1,Size too small
+5010,TEE-M,1,Customer refused at door
+5013,TEE-M,1,Fit is loose
+5017,TEE-M,1,wrong size ordered
+5020,MUG-1,1,Arrived broken
+5021,TEE-M,1,Size too small
+5025,TEE-M,1,Fit is loose
+5029,TEE-M,1,wrong size ordered
+5033,TEE-M,1,Size too small
+5037,TEE-M,1,Fit is loose
+5040,TEE-M,1,Customer refused at door
+5041,TEE-M,1,wrong size ordered
+5045,TEE-M,1,Size too small
+5049,TEE-M,1,Fit is loose
+5053,TEE-M,1,wrong size ordered
+5057,TEE-M,1,Size too small
+5061,TEE-M,1,Fit is loose
+5065,TEE-M,1,wrong size ordered
+5069,TEE-M,1,Size too small
+5070,TEE-M,1,Customer refused at door
+5073,TEE-M,1,Fit is loose
+5077,TEE-M,1,wrong size ordered
+5081,TEE-M,1,Size too small
+5085,TEE-M,1,Fit is loose
+5089,TEE-M,1,wrong size ordered
+5093,TEE-M,1,Size too small
+5097,TEE-M,1,Fit is loose
+5101,TEE-M,1,wrong size ordered
+5105,TEE-M,1,Size too small
+5109,TEE-M,1,Fit is loose
+5113,TEE-M,1,wrong size ordered
+5117,TEE-M,1,Size too small
+9999,OLD-SKU,1,

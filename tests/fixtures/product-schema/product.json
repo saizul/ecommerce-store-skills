@@ -1,0 +1,16 @@
+{
+  "name": "Acme Stoneware Coffee Mug 350 ml",
+  "description": "<p>Hand-glazed <strong>stoneware</strong> mug.</p>",
+  "sku": "MUG-002",
+  "gtin": "036000291452",
+  "brand": "Acme",
+  "image": "https://cdn.example.com/img/mug-1.jpg, https://cdn.example.com/img/mug-2.jpg",
+  "url": "https://shop.example.com/products/stoneware-mug",
+  "price": "1,250",
+  "currency": "BDT",
+  "availability": "in stock",
+  "condition": "new",
+  "rating_value": "4.6",
+  "review_count": "38",
+  "price_valid_until": "2027-12-31"
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout - Example Store</title>
+<script src="https://shop.example.com/wp-content/plugins/woocommerce/assets/js/frontend/checkout.min.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+</head><body>
+<form name="checkout" class="checkout woocommerce-checkout">
+  <p><label for="billing_first_name">First name</label>
+     <input type="text" name="billing_first_name" id="billing_first_name" autocomplete="given-name"></p>
+  <p><label for="billing_last_name">Last name</label>
+     <input type="text" name="billing_last_name" id="billing_last_name" autocomplete="family-name"></p>
+  <p><label for="billing_phone">Phone</label>
+     <input type="tel" name="billing_phone" id="billing_phone" autocomplete="tel"></p>
+  <p><label for="billing_email">Email</label>
+     <input type="email" name="billing_email" id="billing_email" autocomplete="email"></p>
+  <p><label for="billing_address_1">Street address</label>
+     <input type="text" name="billing_address_1" id="billing_address_1" autocomplete="address-line1"></p>
+  <p><label for="billing_city">Town / City</label>
+     <input type="text" name="billing_city" id="billing_city" autocomplete="address-level2"></p>
+  <p><label for="billing_country">Country</label>
+     <select name="billing_country" id="billing_country" autocomplete="country"><option value="BD">Bangladesh</option></select></p>
+  <p><label><input type="checkbox" name="createaccount" id="createaccount"> Create an account?</label></p>
+  <p><label for="account_password">Account password</label>
+     <input type="password" name="account_password" id="account_password" autocomplete="new-password"></p>
+  <ul class="payment_methods">
+    <li><input type="radio" name="payment_method" id="pm_cod" value="cod"><label for="pm_cod">Cash on delivery</label></li>
+    <li><input type="radio" name="payment_method" id="pm_bkash" value="bkash"><label for="pm_bkash">bKash</label></li>
+    <li><input type="radio" name="payment_method" id="pm_stripe" value="stripe"><label for="pm_stripe">Credit card (Stripe)</label></li>
+  </ul>
+  <input type="hidden" name="_wpnonce" value="abc">
+  <button type="submit">Place order</button>
+</form>
+<footer><a href="/refund_returns/">Refund and returns policy</a> <a href="https://wa.me/8801700000000">WhatsApp us</a></footer>
+</body></html>
