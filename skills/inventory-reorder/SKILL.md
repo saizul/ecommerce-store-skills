@@ -47,7 +47,12 @@ Paths below are relative to this skill's folder (in Claude Code: `${CLAUDE_SKILL
    python3 scripts/reorder.py --sales sales.csv --stock stock.csv --service-level 0.98 --cover-days 45
    python3 scripts/reorder.py --sales sales.csv --stock stock.csv --json > reorder.json
    python3 scripts/reorder.py --sales sales.csv --stock stock.csv --out purchase-order.csv
+   python3 scripts/reorder.py --sales sales.csv --stock stock.csv --budget 2500 --out purchase-order.csv
    ```
+   With `--budget`, lines are funded in priority order (stockouts first, then fewest days of
+   stock). A line that does not fit is cut to the largest case-pack multiple that still meets
+   its MOQ, or deferred; `suggested_qty` keeps the unconstrained quantity and the `budget`
+   block reports spent, remaining and unfunded value. Lines without a unit cost are not cut.
    `--as-of` sets the end of the window (default: last sales date), `--window` the history length
    (90). Exit 1 when any SKU is in `stockout` or `reorder`.
 3. **Sanity-check the inputs** before trusting the output: `skipped_sales_rows` (bad dates),

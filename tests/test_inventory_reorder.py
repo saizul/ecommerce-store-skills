@@ -119,3 +119,46 @@ def test_parse_day_and_num():
     assert str(mod.parse_day("23/11/2026")) == "2026-11-23"
     assert mod.parse_day("soon") is None
     assert mod.num("1,250") == 1250 and mod.num("") == 0 and mod.num("x", 7) == 7
+
+
+def test_budget_funds_stockouts_first_and_cuts_to_case_pack():
+    _, full, _ = report()
+    assert "budget" not in full
+    _, data, by = report("--budget", "1000")
+    assert by["MUG-1"]["order_qty"] == 108 and "suggested_qty" not in by["MUG-1"]
+    tee = by["TEE-M"]
+    assert tee["suggested_qty"] == 190 and tee["order_qty"] == 100  # (1000 - 324) / 6.5 -> 104 -> pack 10
+    assert tee["order_value"] == 650 and tee["budget_note"] == "cut to fit budget"
+    b = data["budget"]
+    assert b == {
+        "limit": 1000,
+        "spent": 974,
+        "remaining": 26,
+        "lines_cut": 1,
+        "lines_deferred": 0,
+        "unfunded_value": 585,
+    }
+    assert data["order_value"] == 974
+
+
+def test_budget_defers_lines_below_moq(tmp_path):
+    _, data, by = report("--budget", "500")
+    # 500 - 324 = 176 -> 27 units -> 20 after case pack, below the MOQ of 50.
+    assert by["TEE-M"]["order_qty"] == 0 and by["TEE-M"]["budget_note"] == "deferred: over budget"
+    assert data["budget"]["lines_deferred"] == 1 and data["order_lines"] == 1
+    out = tmp_path / "po.csv"
+    r = run_script(SKILL, SCRIPT, *ARGS, "--budget", "500", "--out", str(out))
+    assert "Budget 500.00: spent 324.00" in r.stdout
+    assert [row["sku"] for row in csv.DictReader(out.open())] == ["MUG-1"]
+
+
+def test_budget_ignores_lines_without_cost():
+    results = [
+        {"sku": "A", "order_qty": 10, "order_value": None},
+        {"sku": "B", "order_qty": 4, "order_value": 40},
+    ]
+    info = mod.apply_budget(results, {"A": (1, 0, 0), "B": (2, 0, 10)}, 25)
+    assert results[0]["order_qty"] == 10 and "no unit cost" in results[0]["budget_note"]
+    assert results[1]["order_qty"] == 2 and results[1]["suggested_qty"] == 4
+    assert info["spent"] == 20 and info["unfunded_value"] == 20
+    assert run_script(SKILL, SCRIPT, *ARGS, "--budget", "-1").returncode == 2
