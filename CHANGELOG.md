@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `inventory-reorder`: `reorder.py --budget AMOUNT` caps the purchase order value. Lines are
+  funded stockouts first, then by fewest days of stock; a line that does not fit is cut to the
+  largest case-pack multiple that still meets its MOQ, or deferred. The report gains a `budget`
+  block (spent, remaining, lines cut/deferred, unfunded value) and `suggested_qty` per cut line.
+
 ## [0.1.0] - 2026-11-25
 
 ### Added

@@ -8,6 +8,9 @@ reorder point = average daily demand * lead time + safety stock, and the suggest
 brings stock up to cover lead time + --cover-days, rounded to case pack and MOQ.
 
 Statuses: stockout, reorder, ok, overstock, dead (no sales in the window), new (short history).
+With --budget, order lines are funded in priority order (stockouts first, then the
+fewest days of stock); a line that does not fit is cut to the largest case-pack multiple
+that still meets its MOQ, or deferred. Lines without a unit cost are never cut.
 Read-only; writes a purchase-order CSV only with --out.
 
 Exit codes: 0 = nothing to reorder, 1 = stockouts or reorders needed, 2 = error.
@@ -112,6 +115,7 @@ def compute(sales: list[dict], stock: list[dict], opts) -> dict:
     z = z_for(opts.service_level)
 
     results = []
+    terms: dict[str, tuple[float, float, float]] = {}
     stock_skus = set()
     for item in stock:
         sku = item["sku"]
@@ -124,6 +128,7 @@ def compute(sales: list[dict], stock: list[dict], opts) -> dict:
         moq = num(item.get("moq"), 0)
         pack = num(item.get("case_pack"), 1) or 1
         cost = num(item.get("unit_cost"), 0)
+        terms[sku] = (pack, moq, cost)
         sku_start = start
         short = False
         if sku in first_sale and first_sale[sku] > start:
@@ -190,10 +195,12 @@ def compute(sales: list[dict], stock: list[dict], opts) -> dict:
             r["days_of_stock"] if r["days_of_stock"] is not None else 1e9,
         )
     )
+    budget = getattr(opts, "budget", None)
+    budget_info = apply_budget(results, terms, budget) if budget is not None else None
     counts = defaultdict(int)
     for r in results:
         counts[r["status"]] += 1
-    return {
+    out = {
         "as_of": as_of.isoformat(),
         "window_days": opts.window,
         "service_level": opts.service_level,
@@ -205,6 +212,53 @@ def compute(sales: list[dict], stock: list[dict], opts) -> dict:
         "sold_but_not_in_stock_file": unknown,
         "skipped_sales_rows": skipped,
         "results": results,
+    }
+    if budget_info is not None:
+        out["budget"] = budget_info
+    return out
+
+
+def apply_budget(results: list[dict], terms: dict, budget: float) -> dict:
+    """Fund order lines in the given (priority) order until the budget runs out.
+
+    A line that does not fit is reduced to the largest case-pack multiple that fits and
+    still meets the MOQ; otherwise it is deferred (order_qty 0). The suggested quantity is
+    kept in ``suggested_qty`` for every line that was cut or deferred.
+    """
+    remaining = budget
+    cut = deferred = 0
+    deferred_value = 0.0
+    for r in results:
+        qty = r["order_qty"]
+        if qty <= 0:
+            continue
+        pack, moq, cost = terms.get(r["sku"], (1, 0, 0))
+        if not cost:
+            r["budget_note"] = "no unit cost; not limited by budget"
+            continue
+        if qty * cost <= remaining + 1e-9:
+            remaining -= qty * cost
+            continue
+        fit = math.floor((remaining + 1e-9) / cost / pack) * pack
+        r["suggested_qty"] = qty
+        if fit > 0 and fit >= moq:
+            r["order_qty"] = int(fit)
+            r["budget_note"] = "cut to fit budget"
+            cut += 1
+        else:
+            r["order_qty"] = 0
+            r["budget_note"] = "deferred: over budget"
+            deferred += 1
+        deferred_value += (qty - r["order_qty"]) * cost
+        r["order_value"] = round(r["order_qty"] * cost, 2)
+        remaining -= r["order_qty"] * cost
+    return {
+        "limit": budget,
+        "spent": round(budget - remaining, 2),
+        "remaining": round(remaining, 2),
+        "lines_cut": cut,
+        "lines_deferred": deferred,
+        "unfunded_value": round(deferred_value, 2),
     }
 
 
@@ -223,11 +277,19 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--service-level", type=float, default=0.95, help="0.80-0.995 (default 0.95)")
     p.add_argument("--overstock-days", type=float, default=180, help="days of stock counted as overstock")
     p.add_argument("--min-history", type=int, default=28, help="SKUs selling for fewer days are 'new'")
+    p.add_argument(
+        "--budget",
+        type=float,
+        help="maximum purchase value; fund stockouts first, then lowest days of stock",
+    )
     p.add_argument("--out", help="write a purchase-order CSV (SKUs with order_qty > 0)")
     p.add_argument("--json", action="store_true", help="print JSON")
     args = p.parse_args(argv)
     if not 0.5 <= args.service_level < 1:
         print("error: --service-level must be between 0.5 and 1", file=sys.stderr)
+        return 2
+    if args.budget is not None and args.budget < 0:
+        print("error: --budget must be zero or more", file=sys.stderr)
         return 2
     try:
         sales = read_csv(args.sales, SALES_COLS, ["date", "sku", "qty"])
@@ -273,6 +335,12 @@ def main(argv: list[str] | None = None) -> int:
             )
         if report["order_value"]:
             print(f"Suggested purchase value: {report['order_value']:.2f}")
+        if "budget" in report:
+            b = report["budget"]
+            print(
+                f"Budget {b['limit']:.2f}: spent {b['spent']:.2f}, {b['lines_cut']} line(s) cut, "
+                f"{b['lines_deferred']} deferred, unfunded {b['unfunded_value']:.2f}"
+            )
         if report["sold_but_not_in_stock_file"]:
             print("Sold but missing from stock file: " + ", ".join(report["sold_but_not_in_stock_file"]))
         if args.out:
